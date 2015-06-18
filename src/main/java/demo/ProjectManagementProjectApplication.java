@@ -21,5 +21,6 @@ public class ProjectManagementProjectApplication {
         managerService.testManagers();
         ProjectService projectService=context.getBean(ProjectService.class);
         projectService.testProjects();
+        projectService.testProjectDevelopers();
     }
 }

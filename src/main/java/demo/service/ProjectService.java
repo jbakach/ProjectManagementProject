@@ -1,5 +1,6 @@
 package demo.service;
 
+import demo.model.Developer;
 import demo.model.Manager;
 import demo.model.Project;
 import demo.repository.ManagerRepository;
@@ -25,6 +26,20 @@ public class ProjectService {
         p.setStartDate(new Date());
         Manager manager=managerRepository.findBySurname("Bakach").get(0);
         p.setManager(manager);
+        projectRepository.save(p);
+    }
+    public void testProjectDevelopers(){
+        Project p=new Project();
+        p.setDescription("Proyecto con Developer");
+        p.setEndDate(new Date(115,9,01));
+        p.setStartDate(new Date());
+        Developer dev=new Developer();
+        dev.setSalary(2000.0);
+        dev.setSurname("Lopo");
+        dev.setName("Momez");
+        dev.setDateIncorporation(new Date());
+        projectRepository.save(p);
+        p.setDeveloper(dev);
         projectRepository.save(p);
     }
 }
