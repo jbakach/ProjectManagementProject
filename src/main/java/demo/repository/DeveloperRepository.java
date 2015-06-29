@@ -16,4 +16,5 @@ public interface DeveloperRepository extends PagingAndSortingRepository<Develope
     public List<Developer> findByDateIncorporationAfter(@Param("dateIncorporation") Date dateIncorporation);
     public List<Developer> findByDateIncorporationBetween(@Param("from") Date from,@Param("to") Date to);
     public List<Developer> findByCategory(@Param("cat") Category cat);
+    List<Developer> findByNameContains(@Param("name") String name);
 }

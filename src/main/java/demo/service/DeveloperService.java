@@ -2,10 +2,13 @@ package demo.service;
 
 import demo.model.Category;
 import demo.model.Developer;
+import demo.model.Speciality;
 import demo.repository.DeveloperRepository;
+import demo.repository.SpecialityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -13,9 +16,12 @@ import java.util.List;
  * Created by poo2 on 17/06/2015.
  */
 @Service
+@Transactional
 public class DeveloperService {
     @Autowired
     private DeveloperRepository developerRepository;
+    @Autowired
+    private SpecialityRepository specialityRepository;
     public void testDevelopers(){
         Developer d= new Developer(Category.ARCHITECT);
         d.setName("Jamal");
@@ -41,5 +47,20 @@ public class DeveloperService {
             System.out.println(dep.toString());
         }
         //changed author commit
+    }
+    public void addSpecialtiesToDevelopers() {
+
+        Developer jamal = developerRepository.findByNameContains("Jamal").get(0);
+        Developer joze = developerRepository.findByNameContains("Joze").get(0);
+
+        Speciality spring = specialityRepository.findByNameContains("Spring").get(0);
+        Speciality android = specialityRepository.findByNameContains("Android").get(0);
+
+        jamal.getSpecialties().add(spring);
+        joze.getSpecialties().add(android);
+
+        developerRepository.save(jamal);
+        developerRepository.save(joze);
+
     }
 }

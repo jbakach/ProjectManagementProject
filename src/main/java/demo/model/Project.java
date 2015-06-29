@@ -1,5 +1,7 @@
 package demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -19,11 +21,13 @@ public class Project {
     @NotNull
     @Column
     private Date startDate;
+
     @NotNull
     @Column
     private Date endDate;
-    @ManyToMany
-    private Developer developer;
+
+
+    @JsonIgnore
     @ManyToMany
     private Set<Developer> developers=new HashSet();
 
@@ -37,14 +41,9 @@ public class Project {
     public void setDevelopers(Set<Developer> developers) {
         this.developers = developers;
     }
-
-    public Developer getDeveloper() {
-        return developer;
-    }
-
-    public void setDeveloper(Developer developer) {
-        this.developer = developer;
-    }
+    @JsonIgnore
+    @ManyToMany
+    private Set<Speciality> specialties = new HashSet<>();
 
     public Project() {
     }
@@ -88,7 +87,28 @@ public class Project {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+    public Set<Speciality> getSpecialties() {
+        return specialties;
+    }
 
+    public void setSpecialties(Set<Speciality> specialties) {
+        this.specialties = specialties;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Project project = (Project) o;
+
+        return !(id != null ? !id.equals(project.id) : project.id != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
     @Override
     public String toString() {
         return "Project{" +

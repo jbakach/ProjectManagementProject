@@ -1,5 +1,7 @@
 package demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,9 +15,13 @@ public class Developer extends Employee{
     @Column
     @Enumerated(EnumType.STRING)
     private Category category;
+    @ManyToMany(mappedBy = "developers")
     private Set<Project> projects=new HashSet();
-    @ManyToMany(mappedBy = "project")
-    private Project project;
+
+    @JsonIgnore
+    @ManyToMany
+    private Set<Speciality> specialties = new HashSet<>();
+
     public Developer(){}
 
     public Developer(Category category) {
@@ -28,6 +34,21 @@ public class Developer extends Employee{
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
+
+    public Set<Speciality> getSpecialties() {
+        return specialties;
+    }
+
+    public void setSpecialties(Set<Speciality> specialties) {
+        this.specialties = specialties;
     }
 
     @Override

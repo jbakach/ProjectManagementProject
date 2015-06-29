@@ -1,14 +1,13 @@
 package demo;
 
-import demo.service.DeveloperService;
-import demo.service.EmployeeService;
-import demo.service.ManagerService;
-import demo.service.ProjectService;
+import demo.service.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@EnableJpaRepositories
 public class ProjectManagementProjectApplication {
 
     public static void main(String[] args) {
@@ -21,6 +20,9 @@ public class ProjectManagementProjectApplication {
         managerService.testManagers();
         ProjectService projectService=context.getBean(ProjectService.class);
         projectService.testProjects();
-        projectService.testProjectDevelopers();
+        SpecialityService specialityService=context.getBean(SpecialityService.class);
+        specialityService.initializeSpecialties();
+        projectService.addSpecialtiesToProjects();
+        developerService.addSpecialtiesToDevelopers();
     }
 }
