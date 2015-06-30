@@ -47,5 +47,14 @@ public class DeveloperController {
             throw new DeveloperException(id);
         return developer;
     }
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public String deleteById (@PathVariable Long id){
+        Developer developer = developerRepository.findOne(id);
+        if (developer == null)
+            throw new DeveloperException(id);
+        else
+            developerRepository.delete(developer);
+        return "Developer con ID "+id+" borrado con éxito de la base de datos";
+    }
 
 }
