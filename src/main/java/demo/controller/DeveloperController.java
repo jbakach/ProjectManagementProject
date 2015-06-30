@@ -52,9 +52,15 @@ public class DeveloperController {
         Developer developer = developerRepository.findOne(id);
         if (developer == null)
             throw new DeveloperException(id);
-        else
-            developerRepository.delete(developer);
+        developerRepository.delete(developer);
         return "Developer con ID "+id+" borrado con éxito de la base de datos";
+    }
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Developer updateById (@PathVariable Long id,@RequestBody Developer developer1){
+        if (developerRepository.findOne(id) == null)
+            throw new DeveloperException(id);
+        developer1= developerRepository.save(developer1);
+        return developer1;
     }
 
 }
