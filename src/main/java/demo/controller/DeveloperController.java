@@ -28,12 +28,15 @@ public class DeveloperController {
     @RequestMapping(method = RequestMethod.GET)
     public List<Developer> findAll(){
         List <Developer> developers=new ArrayList<Developer>();
-        Iterator<Developer> iterator=developerRepository.findAll().iterator();
+        Iterator<Developer> iterator=developerRepository.findAll().iterator();//Se utiliza un Iterator ya que al tener tantos developers
+        //es aconsejable hacerlo en este metodo, ya que facilitat la paginacion y es un metodo muy efectivo, en cambio si lo guardas en una lista
+        //al tener tanto volumen de datos al hacer el get, podria haber riesgo de quedarse sin memoria, y no es aconsejable, este metodo
+        //es el mas viable y eficaz en cuanto a rendimiento y agilidad al hacer operaciones
         while(iterator.hasNext()){
             developers.add(iterator.next());
         }
         return developers;
     }
-    
+
 
 }
