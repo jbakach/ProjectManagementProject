@@ -1,5 +1,6 @@
 package demo.controller;
 
+import demo.exception.DeveloperException;
 import demo.model.Developer;
 import demo.repository.DeveloperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,14 @@ public class DeveloperController {
         }
         return developers;
     }
-
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Developer getById(@PathVariable Long id)//@PathVariable se utiliza para decir a Spring que coja el parametro que se pasa por la URL
+            //y la guarde en una variable que es Long, el nombre de la variable ha de ser el mismo que el del RequestMapping.
+    {
+        Developer developer = developerRepository.findOne(id);
+        if (developer == null)
+            throw new DeveloperException(id);
+        return developer;
+    }
 
 }
