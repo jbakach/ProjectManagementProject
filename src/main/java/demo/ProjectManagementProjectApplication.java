@@ -23,6 +23,6 @@ public class ProjectManagementProjectApplication {
         SpecialityService specialityService=context.getBean(SpecialityService.class);
         specialityService.initializeSpecialties();
         projectService.addSpecialtiesToProjects();
-        developerService.addSpecialtiesToDevelopers()
+        developerService.addSpecialtiesToDevelopers();
     }
 }
