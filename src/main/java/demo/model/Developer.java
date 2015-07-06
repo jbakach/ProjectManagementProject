@@ -26,8 +26,8 @@ public class Developer extends Employee{
         this.reviews = reviews;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "developer")
-
     private Set <Review> reviews=new HashSet<>();
     @JsonIgnore
     @ManyToMany

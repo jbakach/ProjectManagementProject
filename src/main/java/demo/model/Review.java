@@ -12,6 +12,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private long score;
+
     @ManyToOne
     private Developer developer;
     @ManyToOne

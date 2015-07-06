@@ -52,6 +52,7 @@ public class Project {
     @JsonIgnore
     @ManyToMany
     private Set<Speciality> specialties = new HashSet<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "project")
     private Set <Review> reviews=new HashSet<>();
     public Project() {

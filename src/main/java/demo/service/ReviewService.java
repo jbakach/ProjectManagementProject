@@ -1,6 +1,5 @@
 package demo.service;
 
-import demo.model.Developer;
 import demo.model.Review;
 import demo.repository.DeveloperRepository;
 import demo.repository.ReviewRespository;
@@ -15,9 +14,7 @@ public class ReviewService {
     @Autowired
     private DeveloperRepository developerRepository;
     public void testReview(){
-        Review r=new Review();
-        r.setScore((long)8.5);
-        developerRepository.findById()
+
 
     }
 }
