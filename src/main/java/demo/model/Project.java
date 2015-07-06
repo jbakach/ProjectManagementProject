@@ -22,6 +22,14 @@ public class Project {
     @Column
     private Date startDate;
 
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     @NotNull
     @Column
     private Date endDate;
@@ -44,7 +52,8 @@ public class Project {
     @JsonIgnore
     @ManyToMany
     private Set<Speciality> specialties = new HashSet<>();
-
+    @OneToMany(mappedBy = "project")
+    private Set <Review> reviews=new HashSet<>();
     public Project() {
     }
 

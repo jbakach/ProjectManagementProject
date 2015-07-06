@@ -10,7 +10,7 @@ import java.util.Set;
  * Created by poo2 on 17/06/2015.
  */
 @Entity
-public class Manager extends Employee{
+public class  Manager extends Employee{
     @Column
     private Double bonusSuccess;
     @OneToMany (mappedBy = "manager")

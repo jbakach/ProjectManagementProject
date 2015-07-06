@@ -18,6 +18,17 @@ public class Developer extends Employee{
     @ManyToMany(mappedBy = "developers")
     private Set<Project> projects=new HashSet();
 
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    @OneToMany(mappedBy = "developer")
+
+    private Set <Review> reviews=new HashSet<>();
     @JsonIgnore
     @ManyToMany
     private Set<Speciality> specialties = new HashSet<>();
