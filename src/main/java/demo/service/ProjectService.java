@@ -44,6 +44,7 @@ public class ProjectService {
         date =cal.getTime();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         addDevs(projectRepository.findByDescriptionPrueba("Proyecto Java PUE").get(0).getId(), developerRepository.findByCategory(Category.ARCHITECT).get(0).getId());
+        addDevs(projectRepository.findByDescriptionPrueba("Proyecto Java PUE").get(0).getId(), developerRepository.findByCategory(Category.JUNIOR).get(0).getId());
        // addDevs(projectRepository.findByStartDateBeforeOrEquals(sqlDate).get(0).getId(), developerRepository.findByCategory(Category.ARCHITECT).get(0).getId());
         //addDevs(projectRepository.findByStartDateBeforeOrEquals(sqlDate).get(0).getId(), developerRepository.findByCategory(Category.JUNIOR).get(0).getId());
     }

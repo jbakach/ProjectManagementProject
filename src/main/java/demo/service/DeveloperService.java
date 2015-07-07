@@ -57,6 +57,7 @@ public class DeveloperService {
         Speciality android = specialityRepository.findByNameContains("Android").get(0);
 
         jamal.getSpecialties().add(spring);
+        jamal.getSpecialties().add(android);
         joze.getSpecialties().add(android);
 
         developerRepository.save(jamal);

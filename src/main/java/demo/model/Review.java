@@ -11,7 +11,7 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private long score;
+    private double score;
 
     @ManyToOne
     private Developer developer;
@@ -29,11 +29,11 @@ public class Review {
         this.id = id;
     }
 
-    public long getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(Long score) {
+    public void setScore(double score) {
         this.score = score;
     }
 
@@ -76,9 +76,6 @@ public class Review {
         return "Review{" +
                 "id=" + id +
                 ", score=" + score +
-                ", developer=" + developer +
-                ", project=" + project +
-                ", speciality=" + speciality +
                 ", dateReview=" + dateReview +
                 '}';
     }
@@ -101,8 +98,11 @@ public class Review {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (int) (score ^ (score >>> 32));
+        int result;
+        long temp;
+        result = id != null ? id.hashCode() : 0;
+        temp = Double.doubleToLongBits(score);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (developer != null ? developer.hashCode() : 0);
         result = 31 * result + (project != null ? project.hashCode() : 0);
         result = 31 * result + (speciality != null ? speciality.hashCode() : 0);

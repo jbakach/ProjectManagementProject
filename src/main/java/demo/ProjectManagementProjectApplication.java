@@ -24,5 +24,7 @@ public class ProjectManagementProjectApplication {
         specialityService.initializeSpecialties();
         projectService.addSpecialtiesToProjects();
         developerService.addSpecialtiesToDevelopers();
+        ReviewService reviewService=context.getBean(ReviewService.class);
+        reviewService.testReview();
     }
 }

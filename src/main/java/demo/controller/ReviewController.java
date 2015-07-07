@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.util.*;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * Created by poo2 on 06/07/2015.
@@ -52,5 +54,46 @@ public class ReviewController {
         review.setDeveloper(developer);
         review.setSpeciality(speciality);
         return reviewRespository.save(review);
+    }
+    @RequestMapping(value= "/reviews/{id}", method = GET)
+    public Review getById(@PathVariable Long id) {
+        Review review = reviewRespository.findOne(id);
+
+        if (review == null)
+            throw new ReviewException(id);
+
+        return review;
+    }
+    @RequestMapping(value= "/developers/{idDeveloper}/reviews", method = GET)
+    public Set<Review> getDevReviews(@PathVariable Long idDeveloper) {
+        Developer developer=developerRepository.findOne(idDeveloper);
+        if (developer==null)
+            throw new DeveloperException(idDeveloper);
+        Set <Review> reviews= developer.getReviews();
+        return reviews;
+    }
+    @RequestMapping(value= "/developers/{idDeveloper}/reviewsSpeciality", method = GET)
+    public Map<String, List<Review>> getDevReviewsSpeciality(@PathVariable Long idDeveloper) {
+        Developer developer=developerRepository.findOne(idDeveloper);
+        if (developer==null)
+            throw new DeveloperException(idDeveloper);
+
+        Map<String, List<Review>> reviewsSpeciality= new HashMap<String, List<Review>>();
+
+        Set <Review> reviews= developer.getReviews();
+
+        for (Review rev: reviews) {
+            Speciality speciality = rev.getSpeciality();
+
+            if (!reviewsSpeciality.containsKey(speciality.getName())) {
+                List<Review> reviewList = new ArrayList<Review>();
+                reviewsSpeciality.put(speciality.getName(), reviewList);
+            }
+
+            List<Review> reviewList = reviewsSpeciality.get(speciality.getName());
+            reviewList.add(rev);
+
+        }
+        return  reviewsSpeciality;
     }
 }
